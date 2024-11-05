@@ -13,7 +13,7 @@ export default function Home() {
       <GlobalStyles />
       <div>
         <main>
-          <MainHeader>Hello</MainHeader>
+          <MainHeader>Hello, this is Countries Visited app</MainHeader>
         </main>
       </div>
     </>
