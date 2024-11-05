@@ -3,15 +3,15 @@
 import { useState } from 'react';
 import { getAllCountries } from '@/services/restCountriesApi';
 import { Country } from '@/types/country';
+import { CheckboxCard } from '@/components/ui/checkbox-card';
+import { Button } from '@/components/ui/button';
 
 export default function CountriesList() {
   const [countriesList, setCountriesList] = useState<Country[]>([]);
 
   const countries = countriesList.map((country) => (
     <div key={country.name.common}>
-      <img src={country.flags.svg} height={20}></img>
-      <div>common: {country.name.common}</div>
-      <div>official: {country.name.official}</div>
+      <CheckboxCard label={country.name.common}>visited</CheckboxCard>
       <br></br>
     </div>
   ));
@@ -24,7 +24,7 @@ export default function CountriesList() {
   return (
     <div>
       <h2>list of countries</h2>
-      <button onClick={handleAllCountries}>Get countries</button>
+      <Button onClick={handleAllCountries}>Get countries</Button>
       <div>{countries}</div>
     </div>
   );

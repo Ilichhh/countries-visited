@@ -1,4 +1,8 @@
+import GlobalWrapper from '@/components/GlobalWrapper';
 import Header from '@/components/layout/Header';
+import { Provider } from '@/components/ui/provider';
+import StyledComponentsRegistry from '@/lib/registry';
+
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -12,10 +16,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
-        <Header></Header>
-        <main>{children}</main>
+        <Provider>
+          <StyledComponentsRegistry>
+            <GlobalWrapper>
+              <Header></Header>
+              <main>{children}</main>
+            </GlobalWrapper>
+          </StyledComponentsRegistry>
+        </Provider>
       </body>
     </html>
   );
