@@ -1,6 +1,6 @@
 'use client';
 
-import GlobalStyles from '@/styles/globalStyles';
+import GlobalStyles from '@/src/styles/globalStyles';
 
 export default function GlobalWrapper({ children }: { children: React.ReactNode }) {
   return (

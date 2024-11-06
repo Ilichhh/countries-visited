@@ -1,4 +1,4 @@
-import { COUNTRIES_API_BASE_URL } from '@/constants/api';
+import { COUNTRIES_API_BASE_URL } from '@/src/constants/api';
 
 export const getAllCountries = async () => {
   try {

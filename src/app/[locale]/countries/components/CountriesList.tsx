@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { getAllCountries } from '@/services/restCountriesApi';
-import { Country } from '@/types/country';
-import { CheckboxCard } from '@/components/ui/checkbox-card';
-import { Button } from '@/components/ui/button';
+import { getAllCountries } from '@/src/services/restCountriesApi';
+import { Country } from '@/src/types/country';
+import { CheckboxCard } from '@/src/components/ui/checkbox-card';
+import { Button } from '@/src/components/ui/button';
 
 export default function CountriesList() {
   const [countriesList, setCountriesList] = useState<Country[]>([]);
