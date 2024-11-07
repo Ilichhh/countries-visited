@@ -5,6 +5,7 @@ import { getAllCountries } from '@/src/services/restCountriesApi';
 import { Country } from '@/src/types/country';
 import { CheckboxCard } from '@/src/components/ui/checkbox-card';
 import { Button } from '@/src/components/ui/button';
+import { Stack } from '@chakra-ui/react';
 
 export default function CountriesList() {
   const [countriesList, setCountriesList] = useState<Country[]>([]);
@@ -22,10 +23,10 @@ export default function CountriesList() {
   };
 
   return (
-    <div>
+    <Stack>
       <h2>list of countries</h2>
       <Button onClick={handleAllCountries}>Get countries</Button>
       <div>{countries}</div>
-    </div>
+    </Stack>
   );
 }

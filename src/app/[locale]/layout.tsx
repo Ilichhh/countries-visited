@@ -2,13 +2,14 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 
-import { routing } from '@/src/i18n/routing';
-import { Provider } from '@/src/components/ui/provider';
 import StyledComponentsRegistry from '@/src/lib/registry';
 import GlobalWrapper from '@/src/components/GlobalWrapper';
+import { routing } from '@/src/i18n/routing';
+import { Provider as ChakraUIProvider } from '@/src/components/ui/provider';
 import Header from '@/src/components/layout/Header';
 
 import type { Metadata } from 'next';
+import { Footer } from '@/src/components/layout/Footer';
 
 export const metadata: Metadata = {
   title: 'Countries visited',
@@ -32,16 +33,17 @@ export default async function LocaleLayout({ children, params }: Readonly<Locale
   return (
     <html lang={locale} suppressHydrationWarning>
       <body>
-        <Provider>
-          <NextIntlClientProvider messages={messages}>
-            <StyledComponentsRegistry>
+        <ChakraUIProvider>
+          <StyledComponentsRegistry>
+            <NextIntlClientProvider messages={messages}>
               <GlobalWrapper>
                 <Header lng={locale}></Header>
                 <main>{children}</main>
+                <Footer></Footer>
               </GlobalWrapper>
-            </StyledComponentsRegistry>
-          </NextIntlClientProvider>
-        </Provider>
+            </NextIntlClientProvider>
+          </StyledComponentsRegistry>
+        </ChakraUIProvider>
       </body>
     </html>
   );

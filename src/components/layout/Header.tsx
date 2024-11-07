@@ -1,5 +1,7 @@
+import { Group, Flex } from '@chakra-ui/react';
 import Link from 'next/link';
-// лучше типизировать
+import { ColorModeButton } from '../ui/color-mode';
+
 interface HeaderProps {
   lng: string;
 }
@@ -7,10 +9,13 @@ interface HeaderProps {
 export default function Header({ lng }: HeaderProps) {
   return (
     <header>
-      <nav>
-        <Link href={`/${lng}`}>Home</Link>
-        <Link href={`/${lng}/countries`}>Countries</Link>
-      </nav>
+      <Flex justify="space-between">
+        <Group>
+          <Link href={`/${lng}`}>Home</Link>
+          <Link href={`/${lng}/countries`}>Countries</Link>
+        </Group>
+        <ColorModeButton></ColorModeButton>
+      </Flex>
     </header>
   );
 }
