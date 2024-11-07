@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <>
       <div>
-        <h1>{t('welcome')}</h1>
+        <h1>{t('homePage.welcome')}</h1>
       </div>
     </>
   );

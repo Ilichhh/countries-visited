@@ -12,6 +12,8 @@ export default function Header({ lng }: HeaderProps) {
       <Flex justify="space-between">
         <Group>
           <Link href={`/${lng}`}>Home</Link>
+          <Link href={`/${lng}/login`}>Login</Link>
+          <Link href={`/${lng}/register`}>Register</Link>
           <Link href={`/${lng}/countries`}>Countries</Link>
         </Group>
         <ColorModeButton></ColorModeButton>
