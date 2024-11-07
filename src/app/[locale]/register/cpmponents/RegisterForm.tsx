@@ -36,7 +36,7 @@ export const RegisterForm = () => {
         </Field>
         <Field
           label={t('loginPage.emailInput')}
-          invalid={!!errors.name}
+          invalid={!!errors.email}
           errorText={errors.email?.message}
         >
           <Input {...register('email', { required: t('loginPage.errors.emptyEmail') })} />
@@ -59,7 +59,7 @@ export const RegisterForm = () => {
             })}
           />
         </Field>
-        <Button type="submit">Submit</Button>
+        <Button type="submit">{t('loginPage.register.submit')}</Button>
       </Stack>
     </form>
   );
