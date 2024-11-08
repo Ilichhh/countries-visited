@@ -11,15 +11,41 @@ datasource db {
 model User {
   id Int @id @default(autoincrement())
 
-  fullName String
-  email    String
+  fullName String   @unique
+  email    String   @unique
   password String
+  role     UserRole @default(USER)
+
+  privider String?
+  prividerId String?
+
+  worldProfile WorldProfile?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
 
-  countries     Country[]       @relation("UserCountries")
-  UserCountries UserCountries[]
+model WorldProfile {
+  id Int @id @default(autoincrement())
+
+  user   User? @relation(fields: [userId], references: [id])
+  userId Int?  @unique
+
+  token String
+
+  totalTrips Int    @default(0)
+  trips      Trip[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Region {
+  id Int @id @default(autoincrement())
+
+  name String
+
+  countries Country[]
 }
 
 model Country {
@@ -28,16 +54,26 @@ model Country {
   name String
   code String @unique
 
-  users         User[]          @relation("UserCountries")
-  UserCountries UserCountries[]
+  trips Trip[]
+
+  region   Region @relation(fields: [regionId], references: [id])
+  regionId Int
 }
 
-model UserCountries {
-  userId    Int
-  countryId Int
+model Trip {
+  id Int @id @default(autoincrement())
 
-  user    User    @relation(fields: [userId], references: [id])
-  country Country @relation(fields: [countryId], references: [id])
+  startedTripAt DateTime
+  endTripAt     DateTime
+  cities        String[]
 
-  @@id([userId, countryId])
+  country        Country      @relation(fields: [countryId], references: [id])
+  countryId      Int
+  worldProfile   WorldProfile @relation(fields: [worldProfileId], references: [id])
+  worldProfileId Int
+}
+
+enum UserRole {
+  USER
+  ADMIN
 }
