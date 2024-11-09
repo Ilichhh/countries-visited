@@ -10,6 +10,7 @@ import Header from '@/src/components/layout/Header';
 
 import type { Metadata } from 'next';
 import { Footer } from '@/src/components/layout/Footer';
+import { Providers } from '@/src/components/Providers';
 
 export const metadata: Metadata = {
   title: 'Countries visited',
@@ -33,17 +34,19 @@ export default async function LocaleLayout({ children, params }: Readonly<Locale
   return (
     <html lang={locale} suppressHydrationWarning>
       <body>
-        <ChakraUIProvider>
-          <StyledComponentsRegistry>
-            <NextIntlClientProvider messages={messages}>
-              <GlobalWrapper>
-                <Header lng={locale}></Header>
-                <main>{children}</main>
-                <Footer></Footer>
-              </GlobalWrapper>
-            </NextIntlClientProvider>
-          </StyledComponentsRegistry>
-        </ChakraUIProvider>
+        <Providers>
+          <ChakraUIProvider>
+            <StyledComponentsRegistry>
+              <NextIntlClientProvider messages={messages}>
+                <GlobalWrapper>
+                  <Header lng={locale}></Header>
+                  <main>{children}</main>
+                  <Footer></Footer>
+                </GlobalWrapper>
+              </NextIntlClientProvider>
+            </StyledComponentsRegistry>
+          </ChakraUIProvider>
+        </Providers>
       </body>
     </html>
   );
