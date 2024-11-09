@@ -1,4 +1,7 @@
 {
+  "app": {
+    "search": "Search"
+  },
   "homePage": {
     "welcome": "Hello, this is Countries Visited app"
   },

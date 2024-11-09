@@ -1,14 +1,32 @@
 'use client';
-
-import { useState } from 'react';
-import { getAllCountries } from '@/src/services/restCountriesApi';
+import { useState, useEffect, useCallback } from 'react';
 import { Country } from '@/src/types/country';
 import { CheckboxCard } from '@/src/components/ui/checkbox-card';
-import { Button } from '@/src/components/ui/button';
-import { Stack } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
+import { getAllCountries, getCountriesByName } from '@/src/services/restCountriesApi';
 
-export default function CountriesList() {
+interface CountriesListProps {
+  filter: string;
+}
+
+export const CountriesList = ({ filter }: CountriesListProps) => {
   const [countriesList, setCountriesList] = useState<Country[]>([]);
+
+  const handleCountriesList = useCallback(async () => {
+    let countriesData = [];
+    if (filter) {
+      countriesData = await getCountriesByName(filter);
+    } else {
+      countriesData = await getAllCountries();
+    }
+    console.log(countriesData);
+    setCountriesList(countriesData);
+  }, [filter]);
+
+  useEffect(() => {
+    console.log('trigger');
+    handleCountriesList();
+  }, [handleCountriesList]);
 
   const countries = countriesList.map((country) => (
     <div key={country.name.common}>
@@ -17,16 +35,9 @@ export default function CountriesList() {
     </div>
   ));
 
-  const handleAllCountries = async () => {
-    const countriesData = await getAllCountries();
-    setCountriesList(countriesData);
-  };
-
   return (
-    <Stack>
-      <h2>list of countries</h2>
-      <Button onClick={handleAllCountries}>Get countries</Button>
-      <div>{countries}</div>
-    </Stack>
+    <Box h="300px" overflowY="auto" borderWidth="1px">
+      {countries}
+    </Box>
   );
-}
+};
