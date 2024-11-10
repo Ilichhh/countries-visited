@@ -1,12 +1,12 @@
-import { Group } from '@chakra-ui/react';
 import { CountrySelection } from './components/CountrySelection';
 import { SelectedCountries } from './components/SelectedCountries';
+import { Container } from '@/src/components/layout/Container';
 
 export default function Countries() {
   return (
-    <Group>
+    <Container>
       <CountrySelection></CountrySelection>
       <SelectedCountries></SelectedCountries>
-    </Group>
+    </Container>
   );
 }

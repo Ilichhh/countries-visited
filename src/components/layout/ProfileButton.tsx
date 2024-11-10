@@ -2,10 +2,18 @@
 
 import { useSession, signIn, signOut } from 'next-auth/react';
 
-import { Button } from '@chakra-ui/react';
+import { Box, Button } from '@chakra-ui/react';
 import { IconButton } from '@chakra-ui/react';
 import { Avatar } from '../ui/avatar';
-import { MenuContent, MenuItem, MenuRoot, MenuTrigger } from '../ui/menu';
+import {
+  MenuContent,
+  MenuItem,
+  MenuItemGroup,
+  MenuRoot,
+  MenuSeparator,
+  MenuTrigger,
+} from '../ui/menu';
+import { LuSettings, LuLogOut } from 'react-icons/lu';
 
 interface ProfileButtonProps {
   lng: string;
@@ -34,20 +42,27 @@ export const ProfileButton = ({ lng }: ProfileButtonProps) => {
     <>
       <MenuRoot>
         <MenuTrigger asChild>
-          <IconButton rounded="full">
-            <Avatar name={session?.user?.name || ''} src={session?.user?.image || ''} />
+          <IconButton size="xs" rounded="full">
+            <Avatar size="xs" name={session?.user?.name || ''} src={session?.user?.image || ''} />
           </IconButton>
         </MenuTrigger>
         <MenuContent>
-          <MenuItem value="settings">Settings</MenuItem>
-          <MenuItem
-            value="signOut"
-            color="fg.error"
-            _hover={{ bg: 'bg.error', color: 'fg.error' }}
-            onClick={() => signOut()}
-          >
-            Sign out
-          </MenuItem>
+          <MenuItemGroup title={session?.user?.name || ''}>
+            <MenuSeparator />
+            <MenuItem value="settings">
+              <LuSettings />
+              <Box flex="1">Settings</Box>
+            </MenuItem>
+            <MenuItem
+              value="signOut"
+              color="fg.error"
+              _hover={{ bg: 'bg.error', color: 'fg.error' }}
+              onClick={() => signOut()}
+            >
+              <LuLogOut />
+              <Box flex="1">Sign out</Box>
+            </MenuItem>
+          </MenuItemGroup>
         </MenuContent>
       </MenuRoot>
     </>
