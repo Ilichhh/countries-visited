@@ -26,7 +26,7 @@ export const RegisterForm = () => {
 
   return (
     <form onSubmit={onSubmit}>
-      <Stack gap="4" align="flex-start" maxW="sm">
+      <Stack gap="4">
         <Field
           label={t('loginPage.register.nameInput')}
           invalid={!!errors.name}
@@ -59,7 +59,7 @@ export const RegisterForm = () => {
             })}
           />
         </Field>
-        <Button type="submit">{t('loginPage.register.submit')}</Button>
+        <Button type="submit">Create Account</Button>
       </Stack>
     </form>
   );

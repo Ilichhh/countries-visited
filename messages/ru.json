@@ -15,7 +15,7 @@
     },
     "login": {
       "header": "Sign In to Countries Visited app",
-      "submit": "Sign In",
+      "submit": "Login",
       "redirect": "Sign Up"
     },
     "errors": {

@@ -1,8 +1,8 @@
 'use client';
 
-import { useSession, signIn, signOut } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 
-import { Box, Button } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import { IconButton } from '@chakra-ui/react';
 import { Avatar } from '../ui/avatar';
 import {
@@ -14,27 +14,17 @@ import {
   MenuTrigger,
 } from '../ui/menu';
 import { LuSettings, LuLogOut } from 'react-icons/lu';
+import { AuthModalWithButton } from './AuthModalWithButton';
 
-interface ProfileButtonProps {
-  lng: string;
-}
-
-export const ProfileButton = ({ lng }: ProfileButtonProps) => {
+export const ProfileButton = () => {
   const { data: session } = useSession();
 
   if (!session) {
     return (
-      <Button
-        size="xs"
-        onClick={() =>
-          signIn('github', {
-            callbackUrl: `/${lng}/countries`,
-            redirect: true,
-          })
-        }
-      >
-        Sign in
-      </Button>
+      <>
+        <AuthModalWithButton mode="login"></AuthModalWithButton>
+        <AuthModalWithButton mode="register"></AuthModalWithButton>
+      </>
     );
   }
 

@@ -10,16 +10,14 @@ interface HeaderProps {
 export default function Header({ lng }: HeaderProps) {
   return (
     <header>
-      <Flex justify="space-between" py="2" px="6" borderBottomWidth="1px">
+      <Flex justify="space-between" py="4" px="8" borderBottomWidth="1px">
         <Group gap="4">
           <Link href={`/${lng}`}>Home</Link>
-          <Link href={`/${lng}/login`}>Login</Link>
-          <Link href={`/${lng}/register`}>Register</Link>
           <Link href={`/${lng}/countries`}>Countries</Link>
         </Group>
         <Group gap="4">
           <ColorModeButton size="xs"></ColorModeButton>
-          <ProfileButton lng={lng}></ProfileButton>
+          <ProfileButton></ProfileButton>
         </Group>
       </Flex>
     </header>

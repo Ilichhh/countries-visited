@@ -10,12 +10,12 @@
       "header": "Sign Up to Countries Visited app",
       "nameInput": "Enter your name",
       "passwordInputConfirm": "Confirm password",
-      "submit": "Sign Up",
+      "submit": "Register",
       "redirect": "Sign In"
     },
     "login": {
       "header": "Sign In to Countries Visited app",
-      "submit": "Sign In",
+      "submit": "Login",
       "redirect": "Sign Up"
     },
     "errors": {
