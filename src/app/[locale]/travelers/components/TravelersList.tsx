@@ -1,30 +1,19 @@
 'use client';
 
-import { getAllUsers } from '@/src/services/restUsersApi';
-import { Flex } from '@chakra-ui/react';
-import { User } from '@prisma/client';
-import { useCallback, useEffect, useState } from 'react';
+import { useTravelers } from '@/src/hooks/useTravelers';
+
+import { Flex, Spinner } from '@chakra-ui/react';
 import { TravelerCard } from './TravelerCard';
 
 export const TravelersList = () => {
-  const [travelersList, setTravelersList] = useState<User[]>([]);
+  const { data, isLoading } = useTravelers();
 
-  const handleTravelerList = useCallback(async () => {
-    const usersData = await getAllUsers();
-    console.log(usersData);
-    setTravelersList(usersData);
-  }, []);
-
-  useEffect(() => {
-    handleTravelerList();
-  }, [handleTravelerList]);
-
-  const travelers = travelersList.map((user) => (
+  const travelers = data?.map((user) => (
     <div key={user.id}>
       <TravelerCard data={user}></TravelerCard>
       <br></br>
     </div>
   ));
 
-  return <Flex direction="column">{travelers}</Flex>;
+  return <Flex direction="column">{isLoading ? <Spinner /> : travelers}</Flex>;
 };

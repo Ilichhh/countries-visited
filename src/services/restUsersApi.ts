@@ -1,9 +1,8 @@
-export const getAllUsers = async () => {
-  try {
-    const response = await fetch(`http://localhost:3000/api/users`);
-    const data = await response.json();
-    return data;
-  } catch (err) {
-    console.error(err);
-  }
+import axios from 'axios';
+
+import { User } from '@prisma/client';
+
+export const getAllUsers = async (): Promise<User[]> => {
+  const response = await axios.get<User[]>(`http://localhost:3000/api/users`);
+  return response.data;
 };

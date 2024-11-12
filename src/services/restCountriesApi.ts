@@ -1,27 +1,9 @@
+import axios from 'axios';
+
 import { COUNTRIES_API_BASE_URL } from '@/src/constants/api';
+import { Country } from '../types/country';
 
-export const getAllCountries = async () => {
-  try {
-    const response = await fetch(`${COUNTRIES_API_BASE_URL}/all`);
-    const data = await response.json();
-    return data;
-  } catch (err) {
-    console.error(err);
-  }
-};
-
-export const getCountriesByName = async (name: string) => {
-  try {
-    const response = await fetch(`${COUNTRIES_API_BASE_URL}/name/${name}`);
-
-    if (!response.ok) {
-      throw new Error(`Error: ${response.status} ${response.statusText}`);
-    }
-
-    const data = await response.json();
-    return data;
-  } catch (err) {
-    console.error(err);
-    return [];
-  }
+export const getAllCountries = async (): Promise<Country[]> => {
+  const response = await axios.get<Country[]>(`${COUNTRIES_API_BASE_URL}/all`);
+  return response.data;
 };

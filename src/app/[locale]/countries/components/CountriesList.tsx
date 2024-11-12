@@ -1,34 +1,16 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
-import { Country } from '@/src/types/country';
+import { useCountries } from '@/src/hooks/useCountries';
+
+import { Box, Spinner } from '@chakra-ui/react';
 import { CheckboxCard } from '@/src/components/ui/checkbox-card';
-import { Box } from '@chakra-ui/react';
-import { getAllCountries, getCountriesByName } from '@/src/services/restCountriesApi';
 
-interface CountriesListProps {
-  filter: string;
-}
+import { Country } from '@/src/types/country';
 
-export const CountriesList = ({ filter }: CountriesListProps) => {
-  const [countriesList, setCountriesList] = useState<Country[]>([]);
+export const CountriesList = () => {
+  const { data, isLoading } = useCountries();
 
-  const handleCountriesList = useCallback(async () => {
-    let countriesData = [];
-    if (filter) {
-      countriesData = await getCountriesByName(filter);
-    } else {
-      countriesData = await getAllCountries();
-    }
-    console.log(countriesData);
-    setCountriesList(countriesData);
-  }, [filter]);
-
-  useEffect(() => {
-    handleCountriesList();
-  }, [handleCountriesList]);
-
-  const countries = countriesList.map((country) => (
+  const countries = data?.map((country: Country) => (
     <div key={country.name.common}>
       <CheckboxCard label={country.name.common}>visited</CheckboxCard>
       <br></br>
@@ -37,7 +19,7 @@ export const CountriesList = ({ filter }: CountriesListProps) => {
 
   return (
     <Box h="300px" overflowY="auto" borderWidth="1px">
-      {countries}
+      {isLoading ? <Spinner /> : countries}
     </Box>
   );
 };
