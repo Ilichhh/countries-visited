@@ -13,6 +13,7 @@ export default function Header({ lng }: HeaderProps) {
       <Flex justify="space-between" py="4" px="8" borderBottomWidth="1px">
         <Group gap="4">
           <Link href={`/${lng}`}>Home</Link>
+          <Link href={`/${lng}/travelers`}>Travelers</Link>
           <Link href={`/${lng}/countries`}>Countries</Link>
           <Link href={`/${lng}/profile`}>Profile</Link>
         </Group>

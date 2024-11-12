@@ -1,4 +1,5 @@
 'use client';
+
 import { useState, useEffect, useCallback } from 'react';
 import { Country } from '@/src/types/country';
 import { CheckboxCard } from '@/src/components/ui/checkbox-card';
@@ -24,7 +25,6 @@ export const CountriesList = ({ filter }: CountriesListProps) => {
   }, [filter]);
 
   useEffect(() => {
-    console.log('trigger');
     handleCountriesList();
   }, [handleCountriesList]);
 
