@@ -77,29 +77,28 @@ export const authOptions: AuthOptions = {
         return false;
       }
     },
-    // async jwt({ token }) {
-    //   if (!token.email) return;
-    //   const findUser = await prisma.user.findFirst({
-    //     where: {
-    //       email: token.email,
-    //     },
-    //   });
-    //   if (findUser) {
-    //     token.id = String(findUser.id);
-    //     token.email = findUser.email;
-    //     token.fullName = findUser.fullName;
-    //     token.role = findUser.role;
-    //   }
+    async jwt(params) {
+      const { token } = params;
+      if (!token.email) return token;
+      const findUser = await prisma.user.findFirst({
+        where: {
+          email: token.email,
+        },
+      });
 
-    //   return token;
-    // },
-    // session({ session, token }) {
-    //   if (session?.user) {
-    //     session.user.id = token.id;
-    //     session.user.role = token.role;
-    //   }
-    //   return session;
-    // },
+      if (findUser) {
+        token.id = String(findUser.id);
+        token.email = findUser.email;
+        token.fullName = findUser.fullName;
+        token.role = findUser.role;
+      }
+
+      return token;
+    },
+    async session({ session, token }) {
+      session.user.id = token.id;
+      return session;
+    },
   },
 };
 
