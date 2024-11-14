@@ -1,16 +1,23 @@
 'use client';
 
-import { Button } from '@/src/components/ui/button';
-import { DataListItem, DataListRoot } from '@/src/components/ui/data-list';
+import { useState } from 'react';
+import { useSession } from 'next-auth/react';
 import { useUpdateUserStats } from '@/src/hooks/useUpdateUserStats';
 import { useCountryStore } from '@/src/lib/store/useCountryStore';
-import { Stack } from '@chakra-ui/react';
-import { useSession } from 'next-auth/react';
+
+import { Button } from '@/src/components/ui/button';
+import { DataListItem, DataListRoot } from '@/src/components/ui/data-list';
+import { Group, Stack } from '@chakra-ui/react';
+import DatePicker from 'react-datepicker';
+
+import 'react-datepicker/dist/react-datepicker.css';
 
 export const SelectedCountries = () => {
   const country = useCountryStore((state) => state.data);
   const { data: session } = useSession();
   const updateUserStats = useUpdateUserStats();
+  const [startDate, setStartDate] = useState<Date>(new Date());
+  const [endDate, setEndDate] = useState<Date>(new Date());
 
   const content = country && (
     <DataListRoot>
@@ -19,20 +26,29 @@ export const SelectedCountries = () => {
       <DataListItem key={country?.population} label="Population" value={country?.population} />
     </DataListRoot>
   );
-
   const handleClick = () => {
     if (!session || !country) return;
-    updateUserStats.mutate({ id: session.user.id, data: { countryName: country.name.common } });
+    updateUserStats.mutate({
+      id: session.user.id,
+      data: { countryName: country.name.common, startDate, endDate },
+    });
   };
-
   return (
-    <Stack p="14" gap="6">
-      {content || 'not selected'}
-      {content && (
-        <Button variant="surface" onClick={handleClick}>
-          Add country
-        </Button>
-      )}
-    </Stack>
+    <Group>
+      <Stack pl="16" gap="6">
+        {content || 'not selected'}
+        {content && (
+          <Button variant="surface" onClick={handleClick}>
+            Add country
+          </Button>
+        )}
+      </Stack>
+      <Stack>
+        start date
+        <DatePicker selected={startDate} onChange={(date) => setStartDate(date || new Date())} />
+        end date
+        <DatePicker selected={endDate} onChange={(date) => setEndDate(date || new Date())} />
+      </Stack>
+    </Group>
   );
 };

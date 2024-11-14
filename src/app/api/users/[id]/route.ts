@@ -15,7 +15,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
   const { id } = await params;
   const userId = +id;
 
-  const { countryName } = await req.json();
+  const { countryName, startDate, endDate } = await req.json();
 
   try {
     const [updatedUser, newTravel] = await prisma.$transaction([
@@ -34,6 +34,8 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
         data: {
           userId,
           countryName,
+          startDate,
+          endDate,
         },
       }),
     ]);

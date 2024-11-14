@@ -5,8 +5,13 @@ export const useUpdateUserStats = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ id, data }: { id: string; data: { countryName: string } }) =>
-      updateUserStats(id, data),
+    mutationFn: ({
+      id,
+      data,
+    }: {
+      id: string;
+      data: { countryName: string; startDate: Date; endDate: Date };
+    }) => updateUserStats(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['travelers'] });
     },

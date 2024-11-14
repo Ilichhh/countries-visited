@@ -7,7 +7,10 @@ export const getAllUsers = async (): Promise<User[]> => {
   return response.data;
 };
 
-export const updateUserStats = async (id: string, data: { countryName: string }) => {
+export const updateUserStats = async (
+  id: string,
+  data: { countryName: string; startDate: Date; endDate: Date }
+) => {
   const response = await axios.patch(`http://localhost:3000/api/users/${id}`, data);
   return response.data;
 };
