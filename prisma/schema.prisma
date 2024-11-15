@@ -39,6 +39,7 @@ model Travel {
   userId Int
 
   countryName String
+  countryCode String
 
   cities    String[]
   startDate DateTime?

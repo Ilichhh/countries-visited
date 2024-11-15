@@ -30,7 +30,7 @@ export const SelectedCountries = () => {
     if (!session || !country) return;
     updateUserStats.mutate({
       id: session.user.id,
-      data: { countryName: country.name.common, startDate, endDate },
+      data: { countryName: country.name.common, countryCode: country.cca2, startDate, endDate },
     });
   };
   return (

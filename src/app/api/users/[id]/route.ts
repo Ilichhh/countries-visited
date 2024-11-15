@@ -2,10 +2,14 @@ import { prisma } from '@/src/lib/prisma';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
-  const id = await +params.id;
+  const { id } = await params;
+  const userId = +id;
 
   const user = await prisma.user.findFirst({
-    where: { id },
+    where: { id: userId },
+    include: {
+      travels: true,
+    },
   });
 
   return NextResponse.json(user);
@@ -15,7 +19,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
   const { id } = await params;
   const userId = +id;
 
-  const { countryName, startDate, endDate } = await req.json();
+  const { countryName, countryCode, startDate, endDate } = await req.json();
 
   try {
     const [updatedUser, newTravel] = await prisma.$transaction([
@@ -34,6 +38,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
         data: {
           userId,
           countryName,
+          countryCode,
           startDate,
           endDate,
         },
