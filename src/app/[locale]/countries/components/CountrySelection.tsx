@@ -1,8 +1,8 @@
 'use client';
 
-import { Flex } from '@chakra-ui/react';
 import { useSearchInput } from '@/src/hooks/useSearchInput';
 
+import { Flex } from '@chakra-ui/react';
 import { CountriesList } from './CountriesList';
 import { SearchInput } from './SearchInput';
 

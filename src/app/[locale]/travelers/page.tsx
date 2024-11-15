@@ -6,7 +6,6 @@ export default function Travelers() {
   return (
     <Container>
       <Stack p="8">
-        {/* <h2>List of Travelers</h2> */}
         <TravelersList></TravelersList>
       </Stack>
     </Container>

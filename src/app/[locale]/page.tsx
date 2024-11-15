@@ -1,5 +1,6 @@
-import { Container } from '@/src/components/layout/Container';
 import { useTranslations } from 'next-intl';
+
+import { Container } from '@/src/components/layout/Container';
 
 export default function Home() {
   const t = useTranslations();

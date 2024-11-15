@@ -1,5 +1,6 @@
-import { Group, Flex } from '@chakra-ui/react';
 import Link from 'next/link';
+
+import { Group, Flex } from '@chakra-ui/react';
 import { ColorModeButton } from '../ui/color-mode';
 import { ProfileButton } from './ProfileButton';
 
@@ -7,7 +8,7 @@ interface HeaderProps {
   lng: string;
 }
 
-export default function Header({ lng }: HeaderProps) {
+export const Header = ({ lng }: HeaderProps) => {
   return (
     <header>
       <Flex justify="space-between" py="4" px="8" borderBottomWidth="1px">
@@ -24,4 +25,4 @@ export default function Header({ lng }: HeaderProps) {
       </Flex>
     </header>
   );
-}
+};

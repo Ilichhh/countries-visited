@@ -1,8 +1,9 @@
 'use client';
 
-import { Button } from '@/src/components/ui/button';
-import { HStack, Separator, Stack, Text } from '@chakra-ui/react';
 import { signIn } from 'next-auth/react';
+
+import { HStack, Separator, Stack, Text } from '@chakra-ui/react';
+import { Button } from '@/src/components/ui/button';
 import { DialogCloseTrigger, DialogRoot, DialogTrigger } from '../ui/dialog';
 import { DialogBody, DialogContent, DialogHeader, DialogTitle } from '../ui/dialog';
 import { RegisterForm } from './RegisterForm';
