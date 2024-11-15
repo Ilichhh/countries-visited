@@ -16,7 +16,7 @@ export const Header = ({ lng }: HeaderProps) => {
           <Link href={`/${lng}`}>Home</Link>
           <Link href={`/${lng}/travelers`}>Travelers</Link>
           <Link href={`/${lng}/countries`}>Countries</Link>
-          <Link href={`/${lng}/profile`}>Profile</Link>
+          <Link href={`/${lng}/settings`}>Settings</Link>
         </Group>
         <Group gap="4">
           <ColorModeButton size="xs"></ColorModeButton>

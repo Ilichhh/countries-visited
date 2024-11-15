@@ -10,3 +10,10 @@ export interface RegisterFormValues {
   newPassword: string;
   passwordConfirm: string;
 }
+
+export interface SettingsFormValues {
+  avatarUrl: string;
+  fullName: string;
+  countryOfResidence: string;
+  currentCountry: string;
+}
