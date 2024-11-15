@@ -8,16 +8,23 @@ import { useCurrentUserStats } from '@/src/hooks/useCurrentUserStats';
 import { VectorMap } from '@react-jvectormap/core';
 import { worldMill } from '@react-jvectormap/world';
 
+interface CountyCodeList {
+  [key: string]: number;
+}
+
 export const WorldMap = () => {
   const { data, isLoading } = useCountries();
+
   const selectedCountryCode = useCountryStore().data?.cca2;
   const selectCountry = useCountryStore((state) => state.selectCountry);
+
   const { data: userData } = useCurrentUserStats();
   const [values, setValues] = useState([]);
 
   const countyCodeList = useMemo(() => {
-    return userData?.travels?.reduce((acc, curr) => {
-      return { [curr.countryCode]: 333, ...acc };
+    return userData?.travels?.reduce((acc: CountyCodeList, curr: CountyCodeList) => {
+      acc[curr.countryCode] = 333;
+      return acc;
     }, {});
   }, [userData]);
 
