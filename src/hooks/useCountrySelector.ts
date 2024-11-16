@@ -1,20 +1,24 @@
 import { ChangeEvent, useCallback, useState } from 'react';
-import { useDebounce } from 'use-debounce';
+import { useCountries } from '@/src/hooks/useCountries';
+import { useCountryStore } from '@/src/lib/store/useCountryStore';
 
-export const useSearchInput = () => {
+export const useCountrySelector = () => {
   const defaultValue = '';
   const [inputValue, setInputValue] = useState<string>(defaultValue);
-  const [debouncedValue] = useDebounce(inputValue, 1000);
+  const selectCountry = useCountryStore((state) => state.selectCountry);
+  const { data, isLoading } = useCountries();
 
   const handleSearch = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   }, []);
 
   return {
+    data,
+    isLoading,
     defaultValue,
     inputValue,
     setInputValue,
-    debouncedValue,
     handleSearch,
+    selectCountry,
   };
 };

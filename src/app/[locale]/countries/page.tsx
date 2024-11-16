@@ -1,19 +1,19 @@
-import { CountrySelection } from './components/CountrySelection';
 import { WorldMap } from './components/WorldMap';
 import { SelectedCountries } from './components/SelectedCountries';
 import { Container } from '@/src/components/layout/Container';
-import { Group, Stack } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
+import { CountrySelector } from '@/src/components/shared/CountrySelector';
 
 export default function Countries() {
   return (
     <Container>
-      <Stack>
+      <Flex direction="column" gap="8" h="100vh">
         <WorldMap></WorldMap>
-        <Group>
-          <CountrySelection></CountrySelection>
+        <Flex alignItems="flex-start">
+          <CountrySelector></CountrySelector>
           <SelectedCountries></SelectedCountries>
-        </Group>
-      </Stack>
+        </Flex>
+      </Flex>
     </Container>
   );
 }

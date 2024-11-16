@@ -54,6 +54,7 @@ export const WorldMap = () => {
       style={{
         width: '100%',
         height: '400px',
+        marginTop: '32px',
       }}
       series={{
         regions: [
