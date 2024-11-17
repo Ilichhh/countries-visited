@@ -36,7 +36,7 @@ export const ProfileButton = () => {
             <Avatar size="xs" name={session?.user?.name || ''} src={session?.user?.image || ''} />
           </IconButton>
         </MenuTrigger>
-        <MenuContent>
+        <MenuContent p="2">
           <MenuItemGroup title={session?.user?.name || ''}>
             <MenuSeparator />
             <MenuItem value="settings">

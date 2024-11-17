@@ -53,8 +53,7 @@ export const WorldMap = () => {
       map={worldMill}
       style={{
         width: '100%',
-        height: '400px',
-        marginTop: '32px',
+        height: '500px',
       }}
       series={{
         regions: [

@@ -20,7 +20,7 @@ export const Timeline = () => {
   );
 
   return (
-    <Stack mt="8" gap="4">
+    <Stack gap="4">
       {years.map((year: number) => (
         <YearRow key={year} year={year}></YearRow>
       ))}
