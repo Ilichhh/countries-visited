@@ -34,7 +34,7 @@ export default async function LocaleLayout({ children, params }: Readonly<Locale
       <body>
         <Providers>
           <NextIntlClientProvider messages={messages}>
-            <Header lng={locale}></Header>
+            <Header></Header>
             <main>{children}</main>
             <Footer></Footer>
           </NextIntlClientProvider>

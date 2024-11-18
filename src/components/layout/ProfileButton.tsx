@@ -2,6 +2,8 @@
 
 import { useSession, signOut } from 'next-auth/react';
 
+import { Link } from '@/src/i18n/routing';
+
 import { Box } from '@chakra-ui/react';
 import { IconButton } from '@chakra-ui/react';
 import { Avatar } from '../ui/avatar';
@@ -39,10 +41,12 @@ export const ProfileButton = () => {
         <MenuContent p="2">
           <MenuItemGroup title={session?.user?.name || ''}>
             <MenuSeparator />
-            <MenuItem value="settings">
-              <LuSettings />
-              <Box flex="1">Settings</Box>
-            </MenuItem>
+            <Link href="/settings" passHref>
+              <MenuItem as="a" value="settings">
+                <LuSettings />
+                Settings
+              </MenuItem>
+            </Link>
             <MenuItem
               value="signOut"
               color="fg.error"
