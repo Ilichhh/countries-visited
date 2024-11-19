@@ -1,3 +1,6 @@
+import { getUserSession } from '@/src/lib/getUserSession';
+import { redirect } from 'next/navigation';
+
 import { WorldMap } from './components/WorldMap';
 import { SelectedCountries } from './components/SelectedCountries';
 import { Container } from '@/src/components/layout/Container';
@@ -8,7 +11,13 @@ import { ControlPanel } from './components/ControlPanel';
 import { MainUserStats } from './components/MainUserStats';
 import { TravelsData } from './components/TravelsData';
 
-export default function Countries() {
+export default async function Profile() {
+  const session = await getUserSession();
+
+  if (!session) {
+    return redirect('/');
+  }
+
   return (
     <Container>
       <ControlPanel></ControlPanel>

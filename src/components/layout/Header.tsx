@@ -10,9 +10,9 @@ export const Header = () => {
       <Flex justify="space-between" py="4" px="8" borderBottomWidth="1px">
         <Group gap="4">
           <Link href="/">Home</Link>
+          <Link href="/world">World</Link>
           <Link href="/travelers">Travelers</Link>
-          <Link href="/countries">Countries</Link>
-          <Link href="/settings">Settings</Link>
+          <Link href="/profile">Profile</Link>
         </Group>
         <Group gap="4">
           <ColorModeButton size="xs"></ColorModeButton>

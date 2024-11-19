@@ -1,6 +1,7 @@
 'use client';
 
-import { useSession, signOut } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
+import { useCurrentUserStats } from '@/src/hooks/useCurrentUserStats';
 
 import { Link } from '@/src/i18n/routing';
 
@@ -19,9 +20,9 @@ import { LuSettings, LuLogOut } from 'react-icons/lu';
 import { AuthModalWithButton } from './AuthModalWithButton';
 
 export const ProfileButton = () => {
-  const { data: session } = useSession();
+  const { data: userData } = useCurrentUserStats();
 
-  if (!session) {
+  if (!userData) {
     return (
       <>
         <AuthModalWithButton mode="login"></AuthModalWithButton>
@@ -35,11 +36,17 @@ export const ProfileButton = () => {
       <MenuRoot>
         <MenuTrigger asChild>
           <IconButton size="xs" rounded="full">
-            <Avatar size="xs" name={session?.user?.name || ''} src={session?.user?.image || ''} />
+            <Avatar size="xs" name={userData?.fullName || ''} src={userData?.avatarUrl || ''} />
           </IconButton>
         </MenuTrigger>
-        <MenuContent p="2">
-          <MenuItemGroup title={session?.user?.name || ''}>
+        <MenuContent p="2" w="200px">
+          <MenuItemGroup>
+            <Link href={`/${userData?.uniqueLink}`} passHref>
+              <Avatar size="xl" name={userData?.fullName || ''} src={userData?.avatarUrl || ''} />
+              <MenuItem as="a" value="profile">
+                {userData?.fullName || ''}
+              </MenuItem>
+            </Link>
             <MenuSeparator />
             <Link href="/settings" passHref>
               <MenuItem as="a" value="settings">

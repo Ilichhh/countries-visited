@@ -66,6 +66,7 @@ export const authOptions: AuthOptions = {
             email: user.email,
             fullName: user.name || 'User #' + user.id,
             avatarUrl: user.image,
+            uniqueLink: 'user-' + user.id,
             provider: account?.provider,
             providerId: account?.providerAccountId,
           },
