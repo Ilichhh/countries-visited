@@ -10,6 +10,7 @@ import { ProfileBlock } from '@/src/components/layout/ProfileBlock';
 import { ControlPanel } from './components/ControlPanel';
 import { MainUserStats } from './components/MainUserStats';
 import { TravelsData } from './components/TravelsData';
+import { Trips } from './components/Trips';
 
 export default async function Profile() {
   const session = await getUserSession();
@@ -26,6 +27,9 @@ export default async function Profile() {
       </ProfileBlock>
       <ProfileBlock header="About me">
         <MainUserStats></MainUserStats>
+      </ProfileBlock>
+      <ProfileBlock header="Trips">
+        <Trips></Trips>
       </ProfileBlock>
       <ProfileBlock>
         <TravelsData></TravelsData>

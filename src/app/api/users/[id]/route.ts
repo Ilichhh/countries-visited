@@ -8,7 +8,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
   const user = await prisma.user.findFirst({
     where: { id: userId },
     include: {
-      travels: true,
+      trips: true,
     },
   });
 
@@ -22,7 +22,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
   const { countryName, countryCode, startDate, endDate } = await req.json();
 
   try {
-    const [updatedUser, newTravel] = await prisma.$transaction([
+    const [updatedUser, newTrip] = await prisma.$transaction([
       prisma.user.update({
         where: { id: userId },
         data: {
@@ -34,7 +34,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
           },
         },
       }),
-      prisma.travel.create({
+      prisma.trip.create({
         data: {
           userId,
           countryName,
@@ -44,7 +44,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
         },
       }),
     ]);
-    return NextResponse.json({ updatedUser, newTravel });
+    return NextResponse.json({ updatedUser, newTrip });
   } catch (error) {
     console.error(error);
   }

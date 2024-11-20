@@ -1,4 +1,4 @@
-export interface TravelData {
+export interface TripData {
   countryName: string;
   countryCode: string;
   startDate: Date;

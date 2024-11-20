@@ -22,7 +22,7 @@ export const WorldMap = () => {
   const [values, setValues] = useState([]);
 
   const countyCodeList = useMemo(() => {
-    return userData?.travels?.reduce((acc: CountyCodeList, curr: CountyCodeList) => {
+    return userData?.trips?.reduce((acc: CountyCodeList, curr: CountyCodeList) => {
       acc[curr.countryCode] = 333;
       return acc;
     }, {});

@@ -7,7 +7,7 @@ import { YearRow } from './YearRow';
 
 export const Timeline = () => {
   const { data: userData } = useCurrentUserStats();
-  const travels = userData?.travels || [];
+  const travels = userData?.trips || [];
 
   const currentYear = new Date().getFullYear();
   const yearsWithTravels: number[] = travels.map((travel: { startDate: string | number | Date }) =>

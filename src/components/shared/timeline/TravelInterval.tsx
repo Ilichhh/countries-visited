@@ -1,8 +1,8 @@
 import { Flex, Text } from '@chakra-ui/react';
-import { Travel } from '@prisma/client';
+import { Trip } from '@prisma/client';
 
 interface TravelIntervalProps {
-  travel: Travel;
+  travel: Trip;
 }
 
 export const TravelInterval = ({ travel }: TravelIntervalProps) => {

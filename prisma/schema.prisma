@@ -8,6 +8,11 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
+enum UserRole {
+  USER
+  ADMIN
+}
+
 model User {
   id Int @id @default(autoincrement())
 
@@ -27,13 +32,14 @@ model User {
   visitedCountriesCount Int @default(0)
   totalTravelDays       Int @default(0)
 
-  travels Travel[]
+  trips  Trip[]
+  photos Photo[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-model Travel {
+model Trip {
   id Int @id @default(autoincrement())
 
   user   User @relation(fields: [userId], references: [id])
@@ -42,15 +48,26 @@ model Travel {
   countryName String
   countryCode String
 
-  cities    String[]
   startDate DateTime?
   endDate   DateTime?
+
+  photos Photo[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-enum UserRole {
-  USER
-  ADMIN
+model Photo {
+  id          Int     @id @default(autoincrement())
+  url         String
+  description String?
+
+  trip   Trip @relation(fields: [tripId], references: [id])
+  tripId Int
+
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
