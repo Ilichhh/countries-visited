@@ -10,5 +10,9 @@ interface TripPreviewProps {
 export const TripPreview = ({ data }: TripPreviewProps) => {
   const pathname = usePathname();
 
-  return <Link href={`${pathname}/${data?.countryName}`}>{data?.countryName}</Link>;
+  return (
+    <Link href={`${pathname}/${data?.countryName.toLowerCase().replace(' ', '-')}`}>
+      {data?.countryName}
+    </Link>
+  );
 };
