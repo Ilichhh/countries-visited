@@ -1,8 +1,8 @@
 import { ProfileBlock } from '@/src/components/layout/ProfileBlock';
 import { CountrySelector } from '@/src/components/shared/CountrySelector';
 import { Flex } from '@chakra-ui/react';
-import { SelectedCountries } from '../profile/components/SelectedCountries';
-import { WorldMap } from '../profile/components/WorldMap';
+import { SelectedCountries } from '../[username]/components/SelectedCountries';
+import { WorldMap } from '../[username]/components/WorldMap';
 import { Container } from '@/src/components/layout/Container';
 
 export default function World() {
