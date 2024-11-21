@@ -6,7 +6,7 @@ import { User } from '@prisma/client';
 export const useCurrentUserStats = () => {
   const { data: session } = useSession();
   const { data, isLoading } = useQuery<User>({
-    queryKey: ['user'],
+    queryKey: ['currentUser'],
     queryFn: () => getUserStats(session?.user.id || ''),
     enabled: !!session?.user?.id,
   });

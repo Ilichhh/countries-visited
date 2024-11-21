@@ -2,11 +2,15 @@ import { prisma } from '@/src/lib/prisma';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
-  const { id } = await params;
-  const userId = +id;
+  const { id: identifier } = await params;
 
   const user = await prisma.user.findFirst({
-    where: { id: userId },
+    where: {
+      OR: [
+        { id: !isNaN(Number(identifier)) ? Number(identifier) : undefined },
+        { uniqueLink: identifier },
+      ],
+    },
     include: {
       trips: true,
     },

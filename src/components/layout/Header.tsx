@@ -22,7 +22,6 @@ export const Header = () => {
         <Link href="/">Home</Link>
         <Link href="/world">World</Link>
         <Link href="/travelers">Travelers</Link>
-        <Link href="/profile">Profile</Link>
       </Group>
       <Group gap="4">
         <ColorModeButton size="xs"></ColorModeButton>

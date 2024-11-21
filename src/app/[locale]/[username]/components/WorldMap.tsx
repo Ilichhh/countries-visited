@@ -3,10 +3,11 @@
 import { MouseEvent, useCallback, useState, useEffect, useMemo } from 'react';
 import { useCountryStore } from '@/src/lib/store/useCountryStore';
 import { useCountries } from '@/src/hooks/useCountries';
-import { useCurrentUserStats } from '@/src/hooks/useCurrentUserStats';
+import { useParams } from 'next/navigation';
 
 import { VectorMap } from '@react-jvectormap/core';
 import { worldMill } from '@react-jvectormap/world';
+import { useUserStats } from '@/src/hooks/useUserStats';
 
 interface CountyCodeList {
   [key: string]: number;
@@ -18,7 +19,9 @@ export const WorldMap = () => {
   const selectedCountryCode = useCountryStore().data?.cca2;
   const selectCountry = useCountryStore((state) => state.selectCountry);
 
-  const { data: userData } = useCurrentUserStats();
+  const { username } = useParams();
+  const { data: userData } = useUserStats(username as string);
+
   const [values, setValues] = useState([]);
 
   const countyCodeList = useMemo(() => {

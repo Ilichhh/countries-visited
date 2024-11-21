@@ -1,6 +1,4 @@
-import { getUserSession } from '@/src/lib/getUserSession';
-import { notFound } from 'next/navigation';
-import { prisma } from '@/src/lib/prisma';
+import { checkProfileOwnership } from '@/src/lib/checkProfileOwnership';
 
 import { WorldMap } from './components/WorldMap';
 import { SelectedCountries } from './components/SelectedCountries';
@@ -22,21 +20,11 @@ interface ProfileProps {
 export default async function Profile({ params }: ProfileProps) {
   const { username } = await params;
 
-  const user = await prisma.user.findUnique({
-    where: { uniqueLink: username },
-  });
-
-  if (!user) {
-    notFound();
-  }
-
-  const session = await getUserSession();
-
-  const isPrivateView = session?.id && user.id === +session?.id;
+  const isProfileOwner = await checkProfileOwnership(username);
 
   return (
     <Container>
-      {isPrivateView && <ControlPanel></ControlPanel>}
+      {isProfileOwner && <ControlPanel></ControlPanel>}
       <ProfileBlock header="Travel map">
         <WorldMap></WorldMap>
       </ProfileBlock>
@@ -49,7 +37,7 @@ export default async function Profile({ params }: ProfileProps) {
       <ProfileBlock>
         <TravelsData></TravelsData>
       </ProfileBlock>
-      {isPrivateView && (
+      {isProfileOwner && (
         <ProfileBlock header="Select country">
           <Flex alignItems="flex-start">
             <CountrySelector></CountrySelector>

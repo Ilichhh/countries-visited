@@ -1,12 +1,14 @@
 'use client';
 
-import { useCurrentUserStats } from '@/src/hooks/useCurrentUserStats';
+import { useUserStats } from '@/src/hooks/useUserStats';
+import { useParams } from 'next/navigation';
 
 import { Stack } from '@chakra-ui/react';
 import { YearRow } from './YearRow';
 
 export const Timeline = () => {
-  const { data: userData } = useCurrentUserStats();
+  const { username } = useParams();
+  const { data: userData } = useUserStats(username as string);
   const travels = userData?.trips || [];
 
   const currentYear = new Date().getFullYear();

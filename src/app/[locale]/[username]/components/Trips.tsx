@@ -1,6 +1,7 @@
 'use client';
 
-import { useCurrentUserStats } from '@/src/hooks/useCurrentUserStats';
+import { useUserStats } from '@/src/hooks/useUserStats';
+import { useParams } from 'next/navigation';
 
 import { Spinner, Stack } from '@chakra-ui/react';
 import { TripPreview } from './TripPreview';
@@ -8,7 +9,8 @@ import { TripPreview } from './TripPreview';
 import { Trip } from '@prisma/client';
 
 export const Trips = () => {
-  const { data: userData, isLoading } = useCurrentUserStats();
+  const { username } = useParams();
+  const { data: userData, isLoading } = useUserStats(username as string);
 
   if (isLoading) {
     return <Spinner />;
