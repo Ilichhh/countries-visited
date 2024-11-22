@@ -1,6 +1,8 @@
 import { prisma } from '@/src/lib/prisma';
 import { NextRequest, NextResponse } from 'next/server';
 
+import { UserWithTrips } from '@/prisma/types';
+
 export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
   const { id: identifier } = await params;
 
@@ -16,7 +18,9 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
     },
   });
 
-  return NextResponse.json(user);
+  const typedUser: UserWithTrips | null = user;
+
+  return NextResponse.json(typedUser);
 }
 
 export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {

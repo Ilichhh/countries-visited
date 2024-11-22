@@ -22,10 +22,10 @@ export const WorldMap = () => {
   const { username } = useParams();
   const { data: userData } = useUserStats(username as string);
 
-  const [values, setValues] = useState([]);
+  const [values, setValues] = useState({});
 
-  const countyCodeList = useMemo(() => {
-    return userData?.trips?.reduce((acc: CountyCodeList, curr: CountyCodeList) => {
+  const countyCodeList: CountyCodeList | undefined = useMemo(() => {
+    return userData?.trips?.reduce((acc: CountyCodeList, curr) => {
       acc[curr.countryCode] = 333;
       return acc;
     }, {});

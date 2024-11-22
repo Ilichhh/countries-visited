@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-import { User } from '@prisma/client';
+import { Photo } from '@prisma/client';
 
-export const getAllPhotos = async (): Promise<User[]> => {
-  const response = await axios.get<User[]>(`http://localhost:3000/api/photos`);
+export const getAllPhotos = async (): Promise<Photo[]> => {
+  const response = await axios.get<Photo[]>(`http://localhost:3000/api/photos`);
   return response.data;
 };
 

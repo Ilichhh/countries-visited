@@ -27,7 +27,7 @@ export const TripPreview = ({ data }: TripPreviewProps) => {
 
   return (
     <Group gap="4">
-      <Link href={`${pathname}/${data.countryName}-${data.id}`}>{data.countryName}</Link>
+      <Link href={`${pathname}/${data.countryName}/${data.id}`}>{data.countryName}</Link>
       {data?.startDate && data?.endDate && <Text>{convertedDate}</Text>}
     </Group>
   );
