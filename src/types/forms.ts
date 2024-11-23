@@ -12,8 +12,10 @@ export interface RegisterFormValues {
 }
 
 export interface SettingsFormValues {
-  avatarUrl: string;
+  username: string;
   fullName: string;
-  countryOfResidence: string;
-  currentCountry: string;
+  avatarUrl: string;
+  countryOfResidence?: string;
+  currentCountry?: string;
+  bio?: string;
 }

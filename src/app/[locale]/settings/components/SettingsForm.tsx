@@ -2,7 +2,7 @@
 
 import { useForm } from 'react-hook-form';
 
-import { Stack, Input } from '@chakra-ui/react';
+import { Stack, Input, Fieldset } from '@chakra-ui/react';
 import { Field } from '@/src/components/ui/field';
 import { Button } from '@/src/components/ui/button';
 
@@ -22,31 +22,25 @@ export const SettingsForm = () => {
   });
 
   return (
-    <form onSubmit={onSubmit}>
+    <Fieldset.Root onSubmit={onSubmit} size="lg" w="md">
       <Stack gap="4">
-        <Field
-          label="Display name"
-          invalid={!!errors.fullName}
-          errorText={errors.fullName?.message}
-        >
-          <Input {...register('fullName', { required: 'Enter name' })} />
-        </Field>
-        <Field
-          label="I am from"
-          invalid={!!errors.countryOfResidence}
-          errorText={errors.countryOfResidence?.message}
-        >
-          <Input {...register('countryOfResidence')} />
-        </Field>
-        <Field
-          label="Now I live in"
-          invalid={!!errors.currentCountry}
-          errorText={errors.currentCountry?.message}
-        >
-          <Input {...register('currentCountry')} />
-        </Field>
-        <Button type="submit">Save</Button>
+        <Fieldset.Legend>Change username</Fieldset.Legend>
+        <Fieldset.HelperText>Be careful.</Fieldset.HelperText>
+
+        <Fieldset.Content>
+          <Field
+            label="Username"
+            helperText="Your username"
+            invalid={!!errors.currentCountry}
+            errorText={errors.currentCountry?.message}
+          >
+            <Input {...register('currentCountry')} />
+          </Field>
+        </Fieldset.Content>
+        <Button type="submit" alignSelf="flex-start">
+          Change username
+        </Button>
       </Stack>
-    </form>
+    </Fieldset.Root>
   );
 };
