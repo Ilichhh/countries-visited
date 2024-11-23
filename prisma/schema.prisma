@@ -16,24 +16,35 @@ enum UserRole {
 model User {
   id Int @id @default(autoincrement())
 
-  fullName   String
-  email      String   @unique
-  password   String?
-  avatarUrl  String?
-  uniqueLink String   @unique
-  role       UserRole @default(USER)
+  fullName  String
+  email     String   @unique
+  username  String   @unique
+  password  String?
+  avatarUrl String?
+  role      UserRole @default(USER)
 
   provider   String?
   providerId String?
 
-  countryOfResidence String?
-  currentCountry     String?
+  residentCountry      Country? @relation("ResidentCountry", fields: [countryOfResidenceId], references: [cca2])
+  countryOfResidenceId String?
 
-  visitedCountriesCount Int @default(0)
-  totalTravelDays       Int @default(0)
+  visitedCountries Country[] @relation("VisitedCountries")
+  trips            Trip[]
 
-  trips  Trip[]
-  photos Photo[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Country {
+  cca2    String  @id
+  name    String
+  region  String
+  flagUrl String?
+
+  visitingUsers User[] @relation("VisitedCountries")
+  residents     User[] @relation("ResidentCountry")
+  trips         Trip[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -45,8 +56,8 @@ model Trip {
   user   User @relation(fields: [userId], references: [id])
   userId Int
 
-  countryName String
-  countryCode String
+  country   Country @relation(fields: [countryId], references: [cca2])
+  countryId String
 
   startDate DateTime?
   endDate   DateTime?
@@ -64,9 +75,6 @@ model Photo {
 
   trip   Trip @relation(fields: [tripId], references: [id])
   tripId Int
-
-  user   User @relation(fields: [userId], references: [id])
-  userId Int
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

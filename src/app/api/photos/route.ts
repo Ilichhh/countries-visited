@@ -12,11 +12,10 @@ export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData();
     const tripId = formData.get('tripId');
-    const userId = formData.get('userId');
     const description = formData.get('description');
     const file = formData.get('file') as File;
 
-    if (!file || !tripId || !userId) {
+    if (!file || !tripId) {
       return NextResponse.json({ error: 'Файл обязателен' }, { status: 400 });
     }
 
@@ -30,7 +29,6 @@ export async function POST(req: NextRequest) {
         url: photoUrl,
         description: description?.toString(),
         tripId: parseInt(tripId.toString()),
-        userId: parseInt(userId.toString()),
       },
     });
 

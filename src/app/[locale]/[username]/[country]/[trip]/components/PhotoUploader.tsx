@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Button } from '@/src/components/ui/button';
 import { uploadPhoto } from '@/src/services/restPhotosApi';
 
-export const PhotoUploader = ({ tripId, userId }: { tripId: number; userId: number }) => {
+export const PhotoUploader = ({ tripId }: { tripId: number }) => {
   const [file, setFile] = useState<File | null>(null);
 
   const handleUpload = async () => {
@@ -12,7 +12,6 @@ export const PhotoUploader = ({ tripId, userId }: { tripId: number; userId: numb
     const formData = new FormData();
     formData.append('file', file);
     formData.append('tripId', tripId.toString());
-    formData.append('userId', userId.toString());
 
     const data = await uploadPhoto(formData);
 

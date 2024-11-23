@@ -1,11 +1,12 @@
 import { usePathname } from 'next/navigation';
 
 import Link from 'next/link';
-import { Trip } from '@prisma/client';
 import { Group, Text } from '@chakra-ui/react';
 
+import { TripWithPhotos } from '@/prisma/types';
+
 interface TripPreviewProps {
-  data: Trip;
+  data: TripWithPhotos;
 }
 
 export const TripPreview = ({ data }: TripPreviewProps) => {
@@ -27,7 +28,7 @@ export const TripPreview = ({ data }: TripPreviewProps) => {
 
   return (
     <Group gap="4">
-      <Link href={`${pathname}/${data.countryName}/${data.id}`}>{data.countryName}</Link>
+      <Link href={`${pathname}/${data.country.name}/${data.id}`}>{data.country.name}</Link>
       {data?.startDate && data?.endDate && <Text>{convertedDate}</Text>}
     </Group>
   );

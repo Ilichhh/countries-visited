@@ -1,12 +1,14 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updateUserStats } from '@/src/services/restUsersApi';
+
+import { addTrip } from '../services/restTripsApi';
+
 import { TripData } from '../types/trip';
 
 export const useUpdateUserStats = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ id, data }: { id: string; data: TripData }) => updateUserStats(id, data),
+    mutationFn: (data: TripData) => addTrip(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['travelers'] });
     },

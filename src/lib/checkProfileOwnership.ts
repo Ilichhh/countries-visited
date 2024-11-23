@@ -3,7 +3,7 @@ import { getUserSession } from '@/src/lib/getUserSession';
 
 export async function checkProfileOwnership(username: string): Promise<boolean> {
   const user = await prisma.user.findUnique({
-    where: { uniqueLink: username },
+    where: { username },
   });
 
   if (!user) {

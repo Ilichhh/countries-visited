@@ -1,6 +1,8 @@
+import { Country } from './country';
+
 export interface TripData {
-  countryName: string;
-  countryCode: string;
+  userId: string;
+  country: Country;
   startDate: Date;
   endDate: Date;
 }

@@ -9,6 +9,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
   const trip = await prisma.trip.findUnique({
     where: { id: Number(id) },
     include: {
+      country: true,
       photos: true,
     },
   });

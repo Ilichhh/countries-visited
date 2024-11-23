@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 import { User } from '@prisma/client';
-import { TripData } from '../types/trip';
 
 export const getAllUsers = async (): Promise<User[]> => {
   const response = await axios.get<User[]>(`http://localhost:3000/api/users`);
@@ -10,10 +9,5 @@ export const getAllUsers = async (): Promise<User[]> => {
 
 export const getUserStats = async (id: string) => {
   const response = await axios.get(`http://localhost:3000/api/users/${id}`);
-  return response.data;
-};
-
-export const updateUserStats = async (id: string, data: TripData) => {
-  const response = await axios.patch(`http://localhost:3000/api/users/${id}`, data);
   return response.data;
 };

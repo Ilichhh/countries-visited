@@ -8,10 +8,10 @@ interface TravelerCardProps {
 }
 
 export const TravelerCard = ({ data }: TravelerCardProps) => {
-  const { fullName, uniqueLink, email, avatarUrl, visitedCountriesCount } = data;
+  const { fullName, username, email, avatarUrl } = data;
 
   return (
-    <Link href={`/${uniqueLink}`} passHref>
+    <Link href={`/${username}`} passHref>
       <Card.Root flexDirection="row" overflow="hidden" w="xl">
         <Avatar m="6" size="2xl" name={fullName || ''} src={avatarUrl || undefined} />
         <Box>
@@ -23,7 +23,7 @@ export const TravelerCard = ({ data }: TravelerCardProps) => {
               </Stack>
               <StatRoot pt="2">
                 <StatLabel>Countries</StatLabel>
-                <StatValueText>{visitedCountriesCount}</StatValueText>
+                <StatValueText>0?</StatValueText>
               </StatRoot>
             </Group>
           </Card.Body>

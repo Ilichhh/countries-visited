@@ -1,7 +1,7 @@
 import { prisma } from '@/src/lib/prisma';
 import { NextRequest, NextResponse } from 'next/server';
 
-import { UserWithTrips } from '@/prisma/types';
+import { UserWithTripsAndCountries } from '@/prisma/types';
 
 export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
   const { id: identifier } = await params;
@@ -10,50 +10,16 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
     where: {
       OR: [
         { id: !isNaN(Number(identifier)) ? Number(identifier) : undefined },
-        { uniqueLink: identifier },
+        { username: identifier },
       ],
     },
     include: {
       trips: true,
+      visitedCountries: true,
     },
   });
 
-  const typedUser: UserWithTrips | null = user;
+  const typedUser: UserWithTripsAndCountries | null = user;
 
   return NextResponse.json(typedUser);
-}
-
-export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
-  const { id } = await params;
-  const userId = +id;
-
-  const { countryName, countryCode, startDate, endDate } = await req.json();
-
-  try {
-    const [updatedUser, newTrip] = await prisma.$transaction([
-      prisma.user.update({
-        where: { id: userId },
-        data: {
-          visitedCountriesCount: {
-            increment: 1,
-          },
-          totalTravelDays: {
-            increment: 0,
-          },
-        },
-      }),
-      prisma.trip.create({
-        data: {
-          userId,
-          countryName,
-          countryCode,
-          startDate,
-          endDate,
-        },
-      }),
-    ]);
-    return NextResponse.json({ updatedUser, newTrip });
-  } catch (error) {
-    console.error(error);
-  }
 }

@@ -26,20 +26,19 @@ export const SelectedCountries = () => {
       <DataListItem key={country?.population} label="Population" value={country?.population} />
     </DataListRoot>
   );
+
   const handleClick = () => {
     if (!session || !country) return;
-    updateUserStats.mutate({
-      id: session.user.id,
-      data: { countryName: country.name.common, countryCode: country.cca2, startDate, endDate },
-    });
+    updateUserStats.mutate({ userId: session.user.id, country, startDate, endDate });
   };
+
   return (
     <Group>
       <Stack pl="16" gap="6">
         {content || 'not selected'}
         {content && (
           <Button variant="surface" onClick={handleClick}>
-            Add country
+            Add Trip
           </Button>
         )}
       </Stack>

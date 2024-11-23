@@ -41,7 +41,7 @@ export const ProfileButton = () => {
         </MenuTrigger>
         <MenuContent p="2" w="200px">
           <MenuItemGroup>
-            <Link href={`/${userData?.uniqueLink}`} passHref>
+            <Link href={`/${userData?.username}`} passHref>
               <Avatar size="xl" name={userData?.fullName || ''} src={userData?.avatarUrl || ''} />
               <MenuItem as="a" value="profile">
                 {userData?.fullName || ''}
