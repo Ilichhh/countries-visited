@@ -1,11 +1,11 @@
 import { Box, Heading } from '@chakra-ui/react';
 
-interface ProfileBlockProps {
+interface BlockProps {
   children: React.ReactNode;
   header?: string;
 }
 
-export const ProfileBlock = ({ children, header }: ProfileBlockProps) => {
+export const Block = ({ children, header }: BlockProps) => {
   return (
     <Box
       p="4"

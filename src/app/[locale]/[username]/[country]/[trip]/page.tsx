@@ -2,7 +2,7 @@ import { checkProfileOwnership } from '@/src/lib/checkProfileOwnership';
 
 import { Container } from '@/src/components/layout/Container';
 import { PhotoGallery } from './components/PhotoGallery';
-import { ProfileBlock } from '@/src/components/layout/ProfileBlock';
+import { Block } from '@/src/components/layout/Block';
 
 interface TripProps {
   params: {
@@ -17,9 +17,9 @@ export default async function Trip({ params }: TripProps) {
 
   return (
     <Container>
-      <ProfileBlock header="Photo gallery">
+      <Block header="Photo gallery">
         <PhotoGallery isProfileOwner={isProfileOwner}></PhotoGallery>
-      </ProfileBlock>
+      </Block>
     </Container>
   );
 }

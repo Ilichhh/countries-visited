@@ -5,7 +5,7 @@ import { SelectedCountries } from './components/SelectedCountries';
 import { Container } from '@/src/components/layout/Container';
 import { Flex } from '@chakra-ui/react';
 import { CountrySelector } from '@/src/components/shared/CountrySelector';
-import { ProfileBlock } from '@/src/components/layout/ProfileBlock';
+import { Block } from '@/src/components/layout/Block';
 import { ControlPanel } from './components/ControlPanel';
 import { MainUserStats } from './components/MainUserStats';
 import { TravelsData } from './components/TravelsData';
@@ -25,25 +25,25 @@ export default async function Profile({ params }: ProfileProps) {
   return (
     <Container>
       {isProfileOwner && <ControlPanel></ControlPanel>}
-      <ProfileBlock header="Travel map">
+      <Block header="Travel map">
         <WorldMap></WorldMap>
-      </ProfileBlock>
-      <ProfileBlock header="About me">
+      </Block>
+      <Block header="About me">
         <MainUserStats></MainUserStats>
-      </ProfileBlock>
-      <ProfileBlock header="Trips">
+      </Block>
+      <Block header="Trips">
         <Trips></Trips>
-      </ProfileBlock>
-      <ProfileBlock>
+      </Block>
+      <Block>
         <TravelsData></TravelsData>
-      </ProfileBlock>
+      </Block>
       {isProfileOwner && (
-        <ProfileBlock header="Select country">
+        <Block header="Select country">
           <Flex alignItems="flex-start">
             <CountrySelector></CountrySelector>
             <SelectedCountries></SelectedCountries>
           </Flex>
-        </ProfileBlock>
+        </Block>
       )}
     </Container>
   );

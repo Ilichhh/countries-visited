@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-import { User } from '@prisma/client';
+import { UserWithTripsAndCountries } from '@/prisma/types';
 
-export const getAllUsers = async (): Promise<User[]> => {
-  const response = await axios.get<User[]>(`http://localhost:3000/api/users`);
+export const getAllUsers = async (): Promise<UserWithTripsAndCountries[]> => {
+  const response = await axios.get<UserWithTripsAndCountries[]>(`http://localhost:3000/api/users`);
   return response.data;
 };
 
