@@ -43,13 +43,11 @@ export const ProfileButton = () => {
           <MenuItemGroup>
             <Link href={`/${userData?.username}`} passHref>
               <Avatar size="xl" name={userData?.fullName || ''} src={userData?.avatarUrl || ''} />
-              <MenuItem as="a" value="profile">
-                {userData?.fullName || ''}
-              </MenuItem>
+              <MenuItem value="profile">{userData?.fullName || ''}</MenuItem>
             </Link>
             <MenuSeparator />
             <Link href="/settings" passHref>
-              <MenuItem as="a" value="settings">
+              <MenuItem value="settings">
                 <LuSettings />
                 Settings
               </MenuItem>

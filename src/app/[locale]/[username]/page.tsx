@@ -1,6 +1,5 @@
 import { checkProfileOwnership } from '@/src/lib/checkProfileOwnership';
 
-import { WorldMap } from './components/WorldMap';
 import { SelectedCountries } from './components/SelectedCountries';
 import { Container } from '@/src/components/layout/Container';
 import { Flex } from '@chakra-ui/react';
@@ -10,6 +9,7 @@ import { ControlPanel } from './components/ControlPanel';
 import { MainUserStats } from './components/MainUserStats';
 import { TravelsData } from './components/TravelsData';
 import { Trips } from './components/Trips';
+import { Map } from './components/Map';
 
 interface ProfileProps {
   params: {
@@ -25,9 +25,7 @@ export default async function Profile({ params }: ProfileProps) {
   return (
     <Container>
       {isProfileOwner && <ControlPanel></ControlPanel>}
-      <Block header="Travel map">
-        <WorldMap></WorldMap>
-      </Block>
+      <Map></Map>
       <Block header="About me">
         <MainUserStats></MainUserStats>
       </Block>

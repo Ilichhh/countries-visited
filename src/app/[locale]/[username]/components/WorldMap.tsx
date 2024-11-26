@@ -3,17 +3,21 @@
 import { MouseEvent, useCallback, useState, useEffect, useMemo } from 'react';
 import { useCountryStore } from '@/src/lib/store/useCountryStore';
 import { useCountries } from '@/src/hooks/useCountries';
+import { useUserStats } from '@/src/hooks/useUserStats';
 import { useParams } from 'next/navigation';
 
 import { VectorMap } from '@react-jvectormap/core';
 import { worldMill } from '@react-jvectormap/world';
-import { useUserStats } from '@/src/hooks/useUserStats';
 
 interface CountyCodeList {
   [key: string]: number;
 }
 
-export const WorldMap = () => {
+interface WorldMapProps {
+  color: string;
+}
+
+export const WorldMap = ({ color }: WorldMapProps) => {
   const { data, isLoading } = useCountries();
 
   const selectedCountryCode = useCountryStore().data?.cca2;
@@ -53,15 +57,27 @@ export const WorldMap = () => {
 
   return (
     <VectorMap
+      key={color}
       map={worldMill}
+      backgroundColor="bg.muted"
+      regionStyle={{
+        initial: {
+          fill: '#F0F0F0',
+        },
+        hover: {
+          fill: '#D6D6D6',
+        },
+      }}
       style={{
-        width: '100%',
-        height: '500px',
+        width: '100vw',
+        height: '600px',
+        position: 'absolute',
+        left: 0,
       }}
       series={{
         regions: [
           {
-            scale: ['#E2AEFF', '#5E32CA'],
+            scale: ['#E2AEFF', color],
             values: values,
             attribute: '',
           },
