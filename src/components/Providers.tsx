@@ -21,7 +21,7 @@ export const Providers = ({ children }: PropsWithChildren) => {
       <ChakraUIProvider>
         <StyledComponentsRegistry>
           <SessionProvider>
-            <NextTopLoader />
+            <NextTopLoader color="#2299DD" showSpinner={false} />
             <GlobalStyles />
             <Flex direction="column" justify="space-between" h="100vh">
               {children}
