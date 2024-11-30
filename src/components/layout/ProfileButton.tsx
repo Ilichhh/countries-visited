@@ -1,7 +1,7 @@
 'use client';
 
 import { signOut } from 'next-auth/react';
-import { useCurrentUserStats } from '@/src/hooks/useCurrentUserStats';
+import { useCurrentUserStats } from '@/src/hooks/useCurrentUser';
 
 import { Link } from '@/src/i18n/routing';
 

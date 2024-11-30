@@ -1,6 +1,6 @@
 'use client';
 
-import { useCurrentUserStats } from '@/src/hooks/useCurrentUserStats';
+import { useCurrentUserStats } from '@/src/hooks/useCurrentUser';
 
 import { Group, Heading } from '@chakra-ui/react';
 import { Button } from '@/src/components/ui/button';

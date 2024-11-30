@@ -10,6 +10,7 @@ import { SessionProvider } from 'next-auth/react';
 
 import { Provider as ChakraUIProvider } from '@/src/components/ui/provider';
 import { Flex } from '@chakra-ui/react';
+import { Toaster } from './ui/toaster';
 
 import GlobalStyles from '@/src/styles/globalStyles';
 
@@ -22,6 +23,7 @@ export const Providers = ({ children }: PropsWithChildren) => {
         <StyledComponentsRegistry>
           <SessionProvider>
             <NextTopLoader color="#2299DD" showSpinner={false} />
+            <Toaster />
             <GlobalStyles />
             <Flex direction="column" justify="space-between" h="100vh">
               {children}
