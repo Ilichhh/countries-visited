@@ -1,15 +1,11 @@
 'use client';
 
 import { Avatar } from '@/src/components/ui/avatar';
-import { useUserStats } from '@/src/hooks/useUserStats';
+import { useCurrentUserStats } from '@/src/hooks/useCurrentUser';
 import { Flex, Heading, Stack, Text } from '@chakra-ui/react';
 
-interface MainUserInfoProps {
-  id: string;
-}
-
-export const MainUserInfo = ({ id }: MainUserInfoProps) => {
-  const { data: userData } = useUserStats(id);
+export const MainUserInfo = () => {
+  const { data: userData } = useCurrentUserStats();
 
   return (
     <Flex gap="4" mt="4" alignItems="center">

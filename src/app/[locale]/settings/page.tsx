@@ -16,7 +16,7 @@ export default async function Settings() {
   return (
     <Container>
       <Stack gap="8">
-        <MainUserInfo id={session.id}></MainUserInfo>
+        <MainUserInfo></MainUserInfo>
         <Navigation></Navigation>
       </Stack>
     </Container>
