@@ -3,8 +3,8 @@
 import { useCurrentUserStats } from '@/src/hooks/useCurrentUser';
 
 import { Group, Heading } from '@chakra-ui/react';
-import { Button } from '@/src/components/ui/button';
 import { Flex } from '@chakra-ui/react';
+import { AddTripModal } from './AddTripModal';
 // import { ManageButton } from './ManageButton';
 
 export const ControlPanel = () => {
@@ -15,7 +15,7 @@ export const ControlPanel = () => {
       <Heading>{userData?.fullName}</Heading>
       <Group gap="4">
         {/* <ManageButton></ManageButton> */}
-        <Button size="sm">Add country</Button>
+        <AddTripModal></AddTripModal>
       </Group>
     </Flex>
   );
