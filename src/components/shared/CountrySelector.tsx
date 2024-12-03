@@ -1,5 +1,6 @@
 'use client';
 
+import { Dispatch, SetStateAction } from 'react';
 import { useCountrySelector } from '@/src/hooks/useCountrySelector';
 import { InputGroup } from '@/src/components/ui/input-group';
 
@@ -8,12 +9,24 @@ import { Input } from '@chakra-ui/react';
 import { LuSearch, LuSearchX } from 'react-icons/lu';
 import { Text } from '@chakra-ui/react';
 import { Spinner } from '@chakra-ui/react';
-
 import { EmptyState } from '../ui/empty-state';
 
-export const CountrySelector = () => {
+import { Country } from '@/src/types/country';
+
+interface CountrySelectorProps {
+  setStep?: Dispatch<SetStateAction<1 | 2>>;
+}
+
+export const CountrySelector = ({ setStep }: CountrySelectorProps) => {
   const { filteredData, isLoading, inputValue, handleSearch, selectCountry } =
     useCountrySelector('');
+
+  const handleContrySelect = (country: Country) => {
+    selectCountry(country);
+    if (setStep) {
+      setStep(2);
+    }
+  };
 
   const countriesList = filteredData?.length ? (
     filteredData.map((country) => {
@@ -22,7 +35,7 @@ export const CountrySelector = () => {
           p="2"
           cursor="pointer"
           _hover={{ bg: 'bg.muted', cursor: 'pointer' }}
-          onClick={() => selectCountry(country)}
+          onClick={() => handleContrySelect(country)}
           key={country.cca2}
           justifyContent="flex-start"
           alignItems="center"

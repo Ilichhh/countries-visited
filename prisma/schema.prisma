@@ -60,8 +60,9 @@ model Trip {
   country   Country @relation(fields: [countryId], references: [cca2])
   countryId String
 
-  startDate DateTime?
-  endDate   DateTime?
+  startDate   DateTime?
+  endDate     DateTime?
+  description String?
 
   photos Photo[]
 

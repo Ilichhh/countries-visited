@@ -33,7 +33,7 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     const tripData: TripData = await req.json();
-    const { userId, country, startDate, endDate } = tripData;
+    const { userId, country, startDate, endDate, description } = tripData;
 
     if (!userId || !tripData || !tripData.country) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
@@ -70,6 +70,7 @@ export async function POST(req: NextRequest) {
           country: { connect: { cca2: existingCountry.cca2 } },
           startDate: startDate || null,
           endDate: endDate || null,
+          description: description,
         },
       });
 

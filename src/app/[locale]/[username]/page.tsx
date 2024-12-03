@@ -1,9 +1,6 @@
 import { checkProfileOwnership } from '@/src/lib/checkProfileOwnership';
 
-import { SelectedCountries } from './components/SelectedCountries';
 import { Container } from '@/src/components/layout/Container';
-import { Flex } from '@chakra-ui/react';
-import { CountrySelector } from '@/src/components/shared/CountrySelector';
 import { Block } from '@/src/components/layout/Block';
 import { ControlPanel } from './components/ControlPanel';
 import { MainUserStats } from './components/MainUserStats';
@@ -35,14 +32,6 @@ export default async function Profile({ params }: ProfileProps) {
       <Block>
         <TravelsData></TravelsData>
       </Block>
-      {isProfileOwner && (
-        <Block header="Select country">
-          <Flex alignItems="flex-start">
-            <CountrySelector></CountrySelector>
-            <SelectedCountries></SelectedCountries>
-          </Flex>
-        </Block>
-      )}
     </Container>
   );
 }
