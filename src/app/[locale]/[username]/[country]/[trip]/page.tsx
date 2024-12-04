@@ -17,7 +17,7 @@ export default async function Trip({ params }: TripProps) {
 
   return (
     <Container>
-      <Block header="Photo gallery">
+      <Block>
         <PhotoGallery isProfileOwner={isProfileOwner}></PhotoGallery>
       </Block>
     </Container>

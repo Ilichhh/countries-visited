@@ -22,8 +22,13 @@ export const AddTripModal = () => {
     setStep(1);
   };
 
+  const handleOpenChange = () => {
+    setIsOpen(!isOpen);
+    setStep(1);
+  };
+
   return (
-    <DialogRoot onOpenChange={() => setIsOpen(!isOpen)} open={isOpen} lazyMount>
+    <DialogRoot onOpenChange={handleOpenChange} open={isOpen} lazyMount>
       <DialogTrigger asChild>
         <Button size="sm">Add country</Button>
       </DialogTrigger>

@@ -12,7 +12,6 @@ export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData();
     const tripId = formData.get('tripId');
-    const description = formData.get('description');
     const file = formData.get('file') as File;
 
     if (!file || !tripId) {
@@ -20,14 +19,13 @@ export async function POST(req: NextRequest) {
     }
 
     const fileBuffer = Buffer.from(await file.arrayBuffer());
-    const fileName = `${Date.now()}-${file.name}`;
+    const fileName = file.name;
 
     const photoUrl = await uploadPhotoToS3(fileName, fileBuffer, file.type);
 
     const photo = await prisma.photo.create({
       data: {
         url: photoUrl,
-        description: description?.toString(),
         tripId: parseInt(tripId.toString()),
       },
     });

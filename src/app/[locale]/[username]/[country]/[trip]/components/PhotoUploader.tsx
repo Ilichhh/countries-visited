@@ -1,29 +1,51 @@
 'use client';
 
-import { useState } from 'react';
+import { useUploadPhoto } from '@/src/hooks/usePhotos';
+
 import { Button } from '@/src/components/ui/button';
-import { uploadPhoto } from '@/src/services/restPhotosApi';
+import {
+  FileUploadDropzone,
+  FileUploadRoot,
+  FileUploadTrigger,
+} from '@/src/components/ui/file-upload';
+import { LuImagePlus } from 'react-icons/lu';
 
-export const PhotoUploader = ({ tripId }: { tripId: number }) => {
-  const [file, setFile] = useState<File | null>(null);
+interface PhotoUploaderProps {
+  tripId: number;
+  type: 'button' | 'dropzone';
+}
 
-  const handleUpload = async () => {
-    if (!file) return;
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('tripId', tripId.toString());
+export const PhotoUploader = ({ tripId, type }: PhotoUploaderProps) => {
+  const uploadPhoto = useUploadPhoto();
 
-    const data = await uploadPhoto(formData);
-
-    console.log('Фото загружено:', data);
+  const handleUpload = async (data: { files: File[] }) => {
+    data.files.forEach((file) => {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('tripId', tripId.toString());
+      uploadPhoto.mutateAsync(formData);
+    });
   };
 
   return (
-    <div>
-      <input type="file" onChange={(e) => setFile(e.target.files?.[0] || null)} />
-      <Button onClick={handleUpload} disabled={!file} size="xs">
-        Upload
-      </Button>
-    </div>
+    <FileUploadRoot
+      accept={['image/png', 'image/jpeg', 'image/webp']}
+      onFileAccept={handleUpload}
+      maxFiles={50}
+      alignItems="stretch"
+    >
+      {type === 'button' ? (
+        <FileUploadTrigger asChild>
+          <Button size="sm">
+            <LuImagePlus /> Upload photos
+          </Button>
+        </FileUploadTrigger>
+      ) : (
+        <FileUploadDropzone
+          label="No photos yet. Drag and drop here to upload"
+          description=".png, .jpg, .jpeg, .webp up to 50 files in one batch"
+        />
+      )}
+    </FileUploadRoot>
   );
 };

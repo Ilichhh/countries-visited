@@ -28,6 +28,7 @@
     "i18next": "^23.16.4",
     "i18next-resources-to-backend": "^1.2.1",
     "jquery": "^3.7.1",
+    "lucide-react": "^0.464.0",
     "next": "15.0.2",
     "next-auth": "^4.24.10",
     "next-intl": "^3.24.0",
